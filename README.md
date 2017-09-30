@@ -5,7 +5,8 @@
 This is a simple, lightweight, and nice looking bash prompt that runs quickly
 even in very slow shells like MSys2 and Cygwin.
 
-It's colorful and shows the git branch when in a git checkout.
+It's colorful and shows the git branch when in a git checkout, as well as the
+last command exit status (checkmark for success and X mark for non-zero error.)
 
 On MSys2 it also shows the current value of `$MSYSTEM`, that is either `MSYS`,
 `MINGW32` or `MINGW64`.
