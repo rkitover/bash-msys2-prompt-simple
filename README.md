@@ -1,5 +1,7 @@
 # bash-msys2-prompt-simple
 
+![how the prompt looks in a window](/screenshots/bash-msys2-prompt-simple-screenshot.png?raw=true)
+
 This is a simple, lightweight, and nice looking bash prompt that runs quickly
 even in very slow shells like MSys2 and Cygwin.
 
