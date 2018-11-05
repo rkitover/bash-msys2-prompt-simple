@@ -11,8 +11,22 @@ BMPS_cmd_status() {
     fi
 }
 
+BMPS_in_msys2() {
+    if [ -n "$MSYSTEM" ] && [ -z "$BMPS_IN_MSYS2" ]; then
+        if [ "$(uname -o)" = Msys ]; then
+            BMPS_IN_MSYS2=1
+        fi
+    fi
+
+    if [ -n "$BMPS_IN_MSYS2" ]; then
+        return 0
+    fi
+
+    return 1
+}
+
 BMPS_msystem() {
-    if [ -n "$MSYSTEM" ]; then
+    if [ -n "$MSYSTEM" ] && BMPS_in_msys2; then
         # need trailing space here
         printf "${_esc}[35m${_end}%s " "$MSYSTEM"
     fi
