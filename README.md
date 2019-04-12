@@ -11,7 +11,7 @@ last command exit status (checkmark for success and X mark for non-zero error.)
 On MSys2 it also shows the current value of `$MSYSTEM`, that is either `MSYS`,
 `MINGW32` or `MINGW64`.
 
-It is also compatible with many versions of ash/dash and ksh.
+It is also compatible with zsh and many versions of ash/dash and ksh.
 
 It's based on the [Solarized
 Extravagant](https://github.com/magicmonty/bash-git-prompt/blob/master/themes/Solarized_Extravagant.bgptheme)

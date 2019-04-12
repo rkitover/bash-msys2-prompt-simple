@@ -82,3 +82,10 @@ BMPS_cwd() {
 
 PS1="\$(BMPS_cmd_status)  \$(BMPS_msystem)\$(BMPS_cwd) \$(BMPS_git_branch)${_esc}
 ${_end}${_esc}[0;34m${_end}\${USER}${_esc}[0;37m${_end}@${_esc}[1;34m${_end}\$(hostname)  ${_esc}[1;31m${_end}${_esc}➤${_end}${_esc}[0m${_end}  "
+
+# for zsh
+_PS1=$PS1
+
+precmd() {
+    eval "PS1=\"$_PS1\""
+}
