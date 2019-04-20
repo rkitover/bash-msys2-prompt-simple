@@ -1,7 +1,7 @@
 #!/bin/sh
 
-_esc=$(printf '\001')
-_end=$(printf '\002')
+_esc= _end=
+[ -z "$ZSH_VERSION" ] && _esc=$(printf '\001') _end=$(printf '\002')
 
 BMPS_cmd_status() {
     if [ "$?" -eq 0 ]; then
@@ -80,12 +80,15 @@ BMPS_cwd() {
     esac
 }
 
-PS1="\$(BMPS_cmd_status)  \$(BMPS_msystem)\$(BMPS_cwd) \$(BMPS_git_branch)${_esc}
-${_end}${_esc}[0;34m${_end}\${USER}${_esc}[0;37m${_end}@${_esc}[1;34m${_end}\$(hostname)  ${_esc}[1;31m${_end}${_esc}➤${_end}${_esc}[0m${_end}  "
+if [ -z "$ZSH_VERSION" ]; then
+    PS1="\$(BMPS_cmd_status)  \$(BMPS_msystem)\$(BMPS_cwd) \$(BMPS_git_branch)${_esc}
+${_end}${_esc}[0;34m${_end}\${USER}${_esc}[0;37m${_end}@${_esc}[1;34m${_end}\$(hostname)  ${_esc}[1;31m${_end}➤${_esc}[0m${_end}  "
+else
+    setopt PROMPT_SUBST
 
-# for zsh
-_PS1=$PS1
+    precmd() {
+        echo "$(BMPS_cmd_status)  $(BMPS_msystem)$(BMPS_cwd) $(BMPS_git_branch)"
+    }
 
-precmd() {
-    eval "PS1=\"$_PS1\""
-}
+    PS1="%{[0;34m%}\${USER}%{[0;37m%}@%{[1;34m%}\$(hostname)  %{[1;31m%}➤%{[0m%}  "
+fi
