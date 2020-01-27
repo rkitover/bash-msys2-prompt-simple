@@ -1,7 +1,9 @@
 #!/bin/sh
 
-_esc= _end=
-[ -z "$ZSH_VERSION" ] && _esc=$(printf '\001') _end=$(printf '\002')
+_esc= _end= _nl_esc= _nl_end=
+[ -z "$ZSH_VERSION" ]  && _esc=$(printf '\001') _end=$(printf '\002')
+
+[ -z "$BASH_VERSION" ] && _nl_esc=$_esc _nl_end=$_end
 
 BMPS_cmd_status() {
     if [ "$?" -eq 0 ]; then
@@ -80,9 +82,11 @@ BMPS_cwd() {
     esac
 }
 
+: ${USER:=$(whoami)}
+
 if [ -z "$ZSH_VERSION" ]; then
-    PS1="\$(BMPS_cmd_status)  \$(BMPS_msystem)\$(BMPS_cwd) \$(BMPS_git_branch)${_esc}
-${_end}${_esc}[0;34m${_end}\${USER}${_esc}[0;37m${_end}@${_esc}[1;34m${_end}\$(hostname)  ${_esc}[1;31m${_end}➤${_esc}[0m${_end}  "
+    PS1="\$(BMPS_cmd_status)  \$(BMPS_msystem)\$(BMPS_cwd) \$(BMPS_git_branch)${_nl_esc}
+${_nl_end}${_esc}[0;34m${_end}\${USER}${_esc}[0;37m${_end}@${_esc}[1;34m${_end}\$(hostname)  ${_esc}[1;31m${_end}➤${_esc}[0m${_end}  "
 else
     setopt PROMPT_SUBST
 
